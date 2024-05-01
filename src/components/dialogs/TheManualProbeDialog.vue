@@ -181,7 +181,7 @@ export default class TheManualProbeDialog extends Mixins(BaseMixin) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .v-btn-toggle {
     width: 100%;
 }

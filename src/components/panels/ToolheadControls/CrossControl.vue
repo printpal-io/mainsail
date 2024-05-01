@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="scss" scoped>
 .btnMinWidthAuto {
     min-width: auto !important;
 }

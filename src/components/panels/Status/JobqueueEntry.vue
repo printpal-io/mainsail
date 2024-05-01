@@ -275,7 +275,7 @@ export default class StatusPanelJobqueueEntry extends Mixins(BaseMixin) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .filesJobqueue {
     position: relative;
 }

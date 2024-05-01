@@ -173,4 +173,4 @@ export default class TheBedScrewsDialog extends Mixins(BaseMixin, ControlMixin) 
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

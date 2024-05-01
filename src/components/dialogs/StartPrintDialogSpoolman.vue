@@ -73,9 +73,7 @@ export default class StartPrintDialogSpoolman extends Mixins(BaseMixin) {
             return alerts
         }
 
-        let gcodeFilamentType = this.file.filament_type ?? ''
-        if (gcodeFilamentType.includes(';')) gcodeFilamentType = gcodeFilamentType.split(';')[0]
-
+        const gcodeFilamentType = this.file.filament_type ?? ''
         if (
             gcodeFilamentType !== '' &&
             this.activeSpool?.filament?.material?.toLowerCase() !== gcodeFilamentType.toLowerCase()
