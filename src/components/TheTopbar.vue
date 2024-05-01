@@ -70,7 +70,7 @@
             <the-settings-menu />
             <the-top-corner-menu />
         </v-app-bar>
-        <v-snackbar v-model="uploadSnackbar.status" :timeout="-1" :value="true" fixed right bottom>
+        <v-snackbar v-model="uploadSnackbar.status" :timeout="-1" :value="true" fixed right bottom dark>
             <strong>{{ $t('App.TopBar.Uploading') }} {{ uploadSnackbar.filename }}</strong>
             <br />
             {{ Math.round(uploadSnackbar.percent) }} % @ {{ formatFilesize(Math.round(uploadSnackbar.speed)) }}/s

@@ -464,4 +464,4 @@ export default class SettingsMiscellaneousTabLightPresets extends Mixins(BaseMix
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

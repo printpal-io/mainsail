@@ -70,4 +70,4 @@ export default class WebcamListEntry extends Mixins(BaseMixin, WebcamMixin) {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

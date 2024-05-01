@@ -65,11 +65,8 @@
                 <v-row>
                     <v-col class="col-12 py-2 d-flex align-center">
                         <span>
-                            <b class="mr-1">{{ $t('Machine.ConfigFilesPanel.CurrentPath') }}:</b>
-                            <path-navigation
-                                :path="currentPath"
-                                :base-directory-label="`/${root}`"
-                                :on-segment-click="clickPathNavGoToDirectory" />
+                            <b>{{ $t('Machine.ConfigFilesPanel.CurrentPath') }}:</b>
+                            {{ absolutePath }}
                         </span>
                         <v-spacer></v-spacer>
                         <template v-if="disk_usage !== null && !showMissingConfigRootWarning">
@@ -260,7 +257,7 @@
                     <img
                         v-if="dialogImage.item.url"
                         :src="dialogImage.item.url"
-                        style="max-height: 100%; width: auto; object-fit: contain"
+                        style="max-height: 100%; width: auto"
                         alt="image" />
                     <div v-else-if="dialogImage.item.svg" class="fill-width" v-html="dialogImage.item.svg"></div>
                 </div>
@@ -515,7 +512,7 @@
             </panel>
         </v-dialog>
 
-        <v-snackbar v-model="uploadSnackbar.status" :timeout="-1" :value="true" fixed right bottom>
+        <v-snackbar v-model="uploadSnackbar.status" :timeout="-1" :value="true" fixed right bottom dark>
             <span v-if="uploadSnackbar.max > 1" class="mr-1">
                 ({{ uploadSnackbar.number }}/{{ uploadSnackbar.max }})
             </span>
@@ -536,12 +533,10 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
 import BaseMixin from '@/components/mixins/base'
-import ThemeMixin from '@/components/mixins/theme'
 import { formatFilesize, sortFiles } from '@/plugins/helpers'
 import { FileStateFile, FileStateGcodefile } from '@/store/files/types'
 import axios from 'axios'
 import Panel from '@/components/ui/Panel.vue'
-import PathNavigation from '@/components/ui/PathNavigation.vue'
 import { hiddenRootDirectories } from '@/store/variables'
 import {
     mdiFilePlus,
@@ -612,9 +607,9 @@ interface draggingFile {
 }
 
 @Component({
-    components: { Panel, PathNavigation },
+    components: { Panel },
 })
-export default class ConfigFilesPanel extends Mixins(BaseMixin, ThemeMixin) {
+export default class ConfigFilesPanel extends Mixins(BaseMixin) {
     mdiInformation = mdiInformation
     mdiClose = mdiClose
     mdiCog = mdiCog
@@ -780,7 +775,7 @@ export default class ConfigFilesPanel extends Mixins(BaseMixin, ThemeMixin) {
             },
             {
                 text: this.$t('Machine.ConfigFilesPanel.UploadFile'),
-                color: this.machineButtonCol,
+                color: 'grey darken-3',
                 icon: mdiFileUpload,
                 loadingName: null,
                 onlyWriteable: true,
@@ -789,7 +784,7 @@ export default class ConfigFilesPanel extends Mixins(BaseMixin, ThemeMixin) {
             },
             {
                 text: this.$t('Machine.ConfigFilesPanel.CreateFile'),
-                color: this.machineButtonCol,
+                color: 'grey darken-3',
                 icon: mdiFilePlus,
                 loadingName: null,
                 onlyWriteable: true,
@@ -798,7 +793,7 @@ export default class ConfigFilesPanel extends Mixins(BaseMixin, ThemeMixin) {
             },
             {
                 text: this.$t('Machine.ConfigFilesPanel.CreateDirectory'),
-                color: this.machineButtonCol,
+                color: 'grey darken-3',
                 icon: mdiFolderPlus,
                 loadingName: null,
                 onlyWriteable: true,
@@ -807,7 +802,7 @@ export default class ConfigFilesPanel extends Mixins(BaseMixin, ThemeMixin) {
             },
             {
                 text: this.$t('Machine.ConfigFilesPanel.RefreshDirectory'),
-                color: this.machineButtonCol,
+                color: 'grey darken-3',
                 icon: mdiRefresh,
                 loadingName: null,
                 onlyWriteable: false,
@@ -1012,10 +1007,6 @@ export default class ConfigFilesPanel extends Mixins(BaseMixin, ThemeMixin) {
 
     clickRowGoBack() {
         this.currentPath = this.currentPath.slice(0, this.currentPath.lastIndexOf('/'))
-    }
-
-    clickPathNavGoToDirectory(segment: { location: string }) {
-        this.currentPath = segment.location
     }
 
     showContextMenu(e: any, item: FileStateFile) {

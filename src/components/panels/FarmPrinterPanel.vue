@@ -57,17 +57,15 @@
                             style="background-color: rgba(0, 0, 0, 0.3); backdrop-filter: blur(3px)">
                             <v-row>
                                 <v-col class="col-auto pr-0 d-flex align-center" style="width: 58px">
-                                    <img
-                                        v-if="printer_logo"
-                                        :src="printer_logo"
-                                        style="width: 100%"
-                                        class="my-auto"
-                                        alt="Logo" />
-                                    <mainsail-logo
-                                        v-else
-                                        :color="printerLogoColor"
-                                        style="width: 100%"
-                                        class="my-auto" />
+                                    <template v-if="printer_logo">
+                                        <img :src="printer_logo" style="width: 100%" class="my-auto" alt="Logo" />
+                                    </template>
+                                    <template v-else>
+                                        <mainsail-logo
+                                            :color="printerLogoColor"
+                                            style="width: 100%"
+                                            class="my-auto"></mainsail-logo>
+                                    </template>
                                 </v-col>
                                 <v-col class="col" style="width: 100px">
                                     <h3 class="font-weight-regular">{{ printer_status }}</h3>
@@ -123,7 +121,6 @@ import { Debounce } from 'vue-debounce-decorator'
 import WebcamMixin from '@/components/mixins/webcam'
 import WebcamWrapper from '@/components/webcams/WebcamWrapper.vue'
 import { GuiWebcamStateWebcam } from '@/store/gui/webcams/types'
-import ThemeMixin from '@/components/mixins/theme'
 
 @Component({
     components: {
@@ -132,7 +129,7 @@ import ThemeMixin from '@/components/mixins/theme'
         'mainsail-logo': MainsailLogo,
     },
 })
-export default class FarmPrinterPanel extends Mixins(BaseMixin, ThemeMixin, WebcamMixin) {
+export default class FarmPrinterPanel extends Mixins(BaseMixin, WebcamMixin) {
     mdiPrinter3d = mdiPrinter3d
     mdiWebcam = mdiWebcam
     mdiMenuDown = mdiMenuDown
@@ -179,9 +176,9 @@ export default class FarmPrinterPanel extends Mixins(BaseMixin, ThemeMixin, Webc
     }
 
     get printer_image() {
-        if (this.currentWebcam) return this.sidebarBgImage
+        if (this.currentWebcam) return '/img/sidebar-background.svg'
 
-        return this.$store.getters['farm/' + this.printer._namespace + '/getImage'] ?? this.sidebarBgImage
+        return this.$store.getters['farm/' + this.printer._namespace + '/getImage']
     }
 
     get printer_logo() {

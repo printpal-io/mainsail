@@ -1,6 +1,23 @@
+<style scoped>
+.updaterLogScroll {
+    height: 350px;
+    max-height: 350px;
+    overflow-x: hidden;
+}
+
+.updaterLog .title-cell {
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.updaterLog.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+    height: auto;
+}
+</style>
+
 <template>
     <v-dialog :value="application !== ''" persistent max-width="800" class="mx-0">
-        <v-card :loading="!complete">
+        <v-card dark :loading="!complete">
             <template slot="progress">
                 <v-progress-linear color="primary" indeterminate></v-progress-linear>
             </template>
@@ -168,20 +185,3 @@ export default class TheUpdateDialog extends Mixins(BaseMixin) {
     }
 }
 </script>
-
-<style scoped>
-.updaterLogScroll {
-    height: 350px;
-    max-height: 350px;
-    overflow-x: hidden;
-}
-
-.updaterLog .title-cell {
-    white-space: nowrap;
-    vertical-align: top;
-}
-
-.updaterLog.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
-    height: auto;
-}
-</style>

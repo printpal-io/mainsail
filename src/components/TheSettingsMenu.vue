@@ -81,6 +81,7 @@ import SettingsGCodeViewerTab from '@/components/settings/SettingsGCodeViewerTab
 import SettingsEditorTab from '@/components/settings/SettingsEditorTab.vue'
 import SettingsTimelapseTab from '@/components/settings/SettingsTimelapseTab.vue'
 import SettingsNavigationTab from '@/components/settings/SettingsNavigationTab.vue'
+import SettingsAITab from '@/components/settings/SettingsAITab.vue'
 
 import Panel from '@/components/ui/Panel.vue'
 import {
@@ -100,11 +101,9 @@ import {
     mdiWebcam,
     mdiDipSwitch,
     mdiMenu,
-    mdiGrid,
+    mdiEyeOutline
 } from '@mdi/js'
 import SettingsMiscellaneousTab from '@/components/settings/SettingsMiscellaneousTab.vue'
-import SettingsHeightmapTab from '@/components/settings/SettingsHeightmapTab.vue'
-
 @Component({
     components: {
         Panel,
@@ -122,7 +121,7 @@ import SettingsHeightmapTab from '@/components/settings/SettingsHeightmapTab.vue
         SettingsTimelapseTab,
         SettingsMiscellaneousTab,
         SettingsNavigationTab,
-        SettingsHeightmapTab,
+        SettingsAITab
     },
 })
 export default class TheSettingsMenu extends Mixins(BaseMixin) {
@@ -207,10 +206,11 @@ export default class TheSettingsMenu extends Mixins(BaseMixin) {
                 title: this.$t('Settings.NavigationTab.Navigation'),
             },
             {
-                icon: mdiGrid,
-                name: 'heightmap',
-                title: this.$t('Settings.HeightmapTab.Heightmap'),
+                icon: mdiEyeOutline,
+                name: 'AI',
+                title: "AI",
             },
+
         ]
 
         if (this.moonrakerComponents.includes('timelapse')) {
@@ -258,10 +258,6 @@ export default class TheSettingsMenu extends Mixins(BaseMixin) {
 .settings-tabs-bar {
     border-right: 1px solid rgba(255, 255, 255, 0.12);
     height: 100%;
-}
-
-html.theme--light .settings-tabs-bar {
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .settings-tabs.height500 {

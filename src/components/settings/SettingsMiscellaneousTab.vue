@@ -78,4 +78,4 @@ export default class SettingsMiscellaneousTab extends Mixins(BaseMixin) {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
