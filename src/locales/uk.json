@@ -553,7 +553,7 @@
             "Files": "Файли",
             "Flow": "Потік",
             "Headline": "Статус",
-            "Jobqueue": "Черга робіт",
+            "Jobqueue": "Черга робіт ({count})",
             "JobqueueMoreFiles": "більше нема робіт | ще одна робота | {count} більше робіт",
             "Layer": "Шар",
             "Max": "макс",

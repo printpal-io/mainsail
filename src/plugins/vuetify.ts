@@ -9,6 +9,12 @@ Vue.use(Vuetify, {
 export default new Vuetify({
     theme: {
         dark: true,
+        themes: {
+            dark: {
+                panel: '#1e1e1e',
+                toolbar: '#272727',
+            },
+        },
         options: { customProperties: true },
     },
     icons: {

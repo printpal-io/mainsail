@@ -2,21 +2,23 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 
-import defaultLocale from '../locales/en.json'
+function loadLocaleMessages() {
+    const locales = import.meta.globEager('../locales/*.json')
+    const messages: any = {}
 
-const locale = (import.meta.env.VUE_APP_I18N_LOCALE as string) || 'en'
+    for (const file in locales) {
+        const langKey = file.slice(file.lastIndexOf('.') - 2, file.lastIndexOf('.'))
 
-const i18n = new VueI18n({
-    locale,
-    fallbackLocale: (import.meta.env.VUE_APP_I18N_FALLBACK_LOCALE as string) || 'en',
-    messages: { en: defaultLocale },
-})
+        if (langKey && langKey.length > 1) {
+            messages[langKey] = JSON.parse(JSON.stringify(locales[file]))
+        }
+    }
 
-export default i18n
-
-export async function setAndLoadLocale(lang: string) {
-    const locales = await import(`../locales/${lang}.json`)
-    i18n.setLocaleMessage(lang, locales)
-    i18n.locale = lang
-    return locales
+    return messages
 }
+
+export default new VueI18n({
+    locale: (import.meta.env.VUE_APP_I18N_LOCALE as string) || 'en',
+    fallbackLocale: (import.meta.env.VUE_APP_I18N_FALLBACK_LOCALE as string) || 'en',
+    messages: loadLocaleMessages(),
+})

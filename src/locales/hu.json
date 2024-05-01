@@ -543,7 +543,7 @@
             "Files": "Fájlok",
             "Flow": "Anyagáramlás",
             "Headline": "Állapot",
-            "Jobqueue": "Várólista",
+            "Jobqueue": "Várólista ({count})",
             "JobqueueMoreFiles": "Nincs több munka | Még egy munka | {count} munka hátra",
             "Layer": "Réteg",
             "Max": "max",

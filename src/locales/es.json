@@ -638,7 +638,7 @@
             "Files": "Archivos",
             "Flow": "Flujo",
             "Headline": "Estado",
-            "Jobqueue": "Cola de trabajo",
+            "Jobqueue": "Cola de trabajo ({count})",
             "JobqueueMoreFiles": "no mas trabajos | un trabajo mas | {count} trabajos mas",
             "Layer": "Capa",
             "Max": "max",
